@@ -1,0 +1,25 @@
+---
+title: "UW_Admissions"
+author: "Lamar Foster"
+date: "6/12/2020"
+output: html_document
+---
+
+```{r setup, include=T, message=FALSE}
+library(tidyverse)
+library(readxl)
+library(janitor)
+```
+
+```{r}
+UWAD <- read_excel("UW_18Admission.xlsx", sheet = 2)
+clean_df <- clean_names(UWAD)
+clean_df <-  na.omit(clean_df)
+```
+
+```{r}
+#Visualization of COE Admissions by Race
+
+ggplot(clean_df, aes(x= reorder(student_group, offers_percentage), y= offers_percentage, fill= student_group)) + geom_col() + coord_flip()
+```
+
